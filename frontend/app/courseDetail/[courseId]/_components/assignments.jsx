@@ -1,74 +1,46 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { getAllAssignments } from "../api/api_service";
+import React, { useEffect, useState } from "react";
+import { getAllAssignments } from "../../../api/api_service";
 
-export const Assignments = () => {
-  const [courseData, setCourseData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+export const CourseDetailPage = ({ courseId }) => {
+  const [courseDetails, setCourseDetails] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Initialize isLoading state
 
   useEffect(() => {
+    // Inside the useEffect, setIsLoading can be used
     setIsLoading(true);
+    console.log(`Course ID passed to CourseDetailPage is ${courseId}`);
 
-    getAllAssignments([courseId])
+    getAllAssignments(courseId)
       .then((response) => {
         if (response && response.courses && Array.isArray(response.courses)) {
-          setCourseData(response.courses);
+          setCourseDetails(response.courses);
         } else {
           console.warn("Unexpected API response structure.");
         }
       })
       .catch((err) => {
-        setError("An error occurred while fetching course data.");
+        console.error("An error occurred while fetching course data:", err);
+        // Handle error state if necessary
       })
       .finally(() => {
-        setIsLoading(false);
+        setIsLoading(false); // Set isLoading to false after data fetching is done
       });
-  }, []);
+  }, [courseId]); // Include courseId as a dependency to re-run the effect when courseId changes
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-200">
-      {isLoading && (
-        <div className="m-4 p-4 bg-blue-600 text-white rounded">
-          <h1>Loading Assignments...</h1>
+    <div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : courseDetails ? (
+        <div>
+          <h1>{`Course ID: ${courseDetails.courseId}`}</h1>
+          <p>{`Description: ${courseDetails.courseDescription}`}</p>
         </div>
-      )}
-      {error && (
-        <div className="m-4 p-4 bg-red-600 text-white rounded">
-          <h1>{error}</h1>
-        </div>
-      )}
-      {!isLoading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {courseData.length > 0 ? (
-            courseData.map((course, index) => (
-              <Link
-                href={`/courseDetail/${course.courseId}`}
-                key={index}
-                passHref
-              >
-                <div className="bg-white rounded shadow-md p-4 cursor-pointer">
-                  <CardHeader>
-                    <CardTitle>{course.courseId}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <CardDescription>
-                      {course.courseDescription}
-                    </CardDescription>
-                  </CardContent>
-                  <CardFooter></CardFooter>
-                </div>
-              </Link>
-            ))
-          ) : (
-            <div className="m-4 p-4 bg-yellow-600 text-white rounded">
-              <h1>No Assignments Available</h1>
-            </div>
-          )}
-        </div>
+      ) : (
+        <p>No data available.</p>
       )}
     </div>
   );
 };
 
-export default Assignments;
+export default CourseDetailPage;

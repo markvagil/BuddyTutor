@@ -22,7 +22,7 @@ Content-Type: application/json
 
 ###router.get('/getAllAssignments', dashboardData.getAllAssignments); //  const getAllAssignments = async (req, res) => {
 
-GET http://localhost:3000/getAllAssignments
+POST http://localhost:3000/getAllAssignments
 Content-Type: application/json
   
  {

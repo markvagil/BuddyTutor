@@ -23,6 +23,10 @@ export const Navbar = () => {
           <Link href="/dashboard">Dashboard</Link>
         </Button>
 
+        <Button asChild>
+          <Link href="/chat">Chat</Link>
+        </Button>
+
         <Button size="icon" asChild>
           <Link href="/settings">
             <Settings />

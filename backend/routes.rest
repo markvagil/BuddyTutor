@@ -11,3 +11,23 @@ Content-Type: application/json
   "question": "hello, what is 100 * 100"
  }
  
+
+###router.get('/get_assignment_data', dashboardData.getAssignmentData);  const { courseId, assignmentId } = req.body;
+
+GET http://localhost:3000/get_assignment_data
+Content-Type: application/json
+  
+ {
+  "courseId": "CS101",
+  "assignmentId": "A1"
+ }
+
+###router.get('/getAllAssignments', dashboardData.getAllAssignments); //  const getAllAssignments = async (req, res) => {
+
+GET http://localhost:3000/getAllAssignments
+Content-Type: application/json
+  
+ {
+  "courseId": "CS101"
+ }
+

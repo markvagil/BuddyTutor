@@ -2,6 +2,7 @@
 const express = require('express');
 const chatController = require('../controllers/chatgpt.js');
 const frontendQuery = require('../controllers/frontend_query.js');
+const dashboardData = require('../controllers/dashboard_data.js');
 
 const router = express.Router();
 
@@ -16,6 +17,10 @@ const checkAuthStatus = (req, res, next) => { // This is the middleware that wil
 router.post('/chat', chatController.chatController);
 
 router.post('/add_question', frontendQuery.addQuestion);
+
+router.get('/get_assignment_data', dashboardData.getAssignmentData);
+
+router.get('/getAllAssignments', dashboardData.getAllAssignments);
 
 
 module.exports = router

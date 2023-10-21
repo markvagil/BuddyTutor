@@ -13,16 +13,15 @@ const checkAuthStatus = (req, res, next) => { // This is the middleware that wil
     res.redirect('http://localhost:3000/login');
 }
 
-
-router.post('/chat', chatController.chatController);
-
 router.post('/add_question', frontendQuery.addQuestion);
 
 router.get('/get_assignment_data', dashboardData.getAssignmentData);
 
 router.get('/getAllAssignments', dashboardData.getAllAssignments);
 
-router.get('/getAnalytics', dashboardData.getAnalytics)
+router.get('/getAnalytics', dashboardData.getAnalytics);
+
+router.get('/allCourses', dashboardData.getAllCourseInfo);
 
 
 module.exports = router

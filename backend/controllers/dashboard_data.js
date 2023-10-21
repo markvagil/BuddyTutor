@@ -124,7 +124,26 @@ const getAssignmentData = async (req, res) => {
                 return;
               }
     }
+    const getAllCourseInfo = async (req, res) => {
+        try {
+          // Search for all courses in the collection
+          console.log(`Fetching all courses.`);
+          const courses = await Course.find({}, 'courseId courseDescription'); // Select only the courseId and courseDescription fields
+          console.log('Query result:', courses ? JSON.stringify(courses, null, 2) : 'No courses found');
+      
+          if (!courses || courses.length === 0) {
+            res.status(404).send({ error: "No courses found." });
+            return;
+          }
+      
+          // Send the array of course information back to the client
+          res.status(200).send({ courses });
+        } catch (err) {
+          console.error(err);
+          res.status(500).send({ error: `An error occurred while processing your request: ${err.message}` });
+        }
+      };
 
-    module.exports = { getAssignmentData, getAllAssignments, getAnalytics };
+    module.exports = { getAssignmentData, getAllAssignments, getAnalytics, getAllCourseInfo };
     
     

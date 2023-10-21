@@ -1,4 +1,3 @@
-
 ###
 #courseId, assignmentId, studentId, question
 POST http://localhost:3000/add_question
@@ -10,7 +9,6 @@ Content-Type: application/json
   "studentId": "joey",
   "question": "hello, what is 100 * 100"
  }
- 
 
 ###router.get('/get_assignment_data', dashboardData.getAssignmentData);  const { courseId, assignmentId } = req.body;
 
@@ -31,7 +29,6 @@ Content-Type: application/json
   "courseId": "CS101"
  }
 
-
 ###router.get('/getAnalytics', dashboardData.getAnalytics) const getAnalytics = async(req, res) => {
         // This will be used to get the analytics for an assignment in the course, 
         //const { courseId, assignmentId } = req.body;
@@ -43,3 +40,7 @@ Content-Type: application/json
   "courseId": "CS101",
   "assignmentId": "A1"
  }
+
+### Get all courses
+ GET http://localhost:3000/allCourses
+Content-Type: application/json

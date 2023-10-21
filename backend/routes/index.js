@@ -20,8 +20,8 @@ router.get("/get_assignment_data", dashboardData.getAssignmentData);
 
 router.post("/getAllAssignments", dashboardData.getAllAssignments);
 
-router.get("/getAnalytics", dashboardData.getAnalytics);
+router.post("/getAnalytics", dashboardData.getAnalytics);
 
-router.get("/allCourses", dashboardData.getAllCourseInfo);
+router.post("/allCourses", dashboardData.getAllCourseInfo);
 
 module.exports = router;

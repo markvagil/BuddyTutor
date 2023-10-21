@@ -34,7 +34,7 @@ Content-Type: application/json
         // This will be used to get the analytics for an assignment in the course, 
         //const { courseId, assignmentId } = req.body;
 
-GET http://localhost:3000/getAnalytics
+POST http://localhost:3000/getAnalytics
 Content-Type: application/json
   
  {
@@ -43,5 +43,5 @@ Content-Type: application/json
  }
 
 ### Get all courses
- GET http://localhost:3000/allCourses
+POST http://localhost:3000/allCourses
 Content-Type: application/json

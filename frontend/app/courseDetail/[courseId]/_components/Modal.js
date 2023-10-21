@@ -4,15 +4,19 @@ import { getAnalytics } from '../../../api/api_service';
 
 const Modal = ({ assignment, closeModal, courseId }) => {
   const [analyticsData, setAnalyticsData] = useState(null);
+  const [loadingStatus, setLoadingStatus] = useState('idle'); // idle, loading, loaded, error
 
   useEffect(() => {
     if (courseId && assignment?.assignmentId) {
+      setLoadingStatus('loading');
       getAnalytics(courseId, assignment.assignmentId)
         .then((data) => {
           setAnalyticsData(data);  // Update the state to hold analytics data
+          setLoadingStatus('loaded');
         })
         .catch((error) => {
           console.error(error);
+          setLoadingStatus('error');
         });
     }
   }, [courseId, assignment]);
@@ -34,12 +38,14 @@ const Modal = ({ assignment, closeModal, courseId }) => {
             )) : <p>No prompts available for this assignment.</p>}
           </ul>
           {/* Display analytics if available */}
-          {analyticsData && analyticsData.chatResponse ? (
-            <div className="analytics-side-pane">
-              <h3>Analytics</h3>
-              <p>{analyticsData.chatResponse.message}</p>  {/* Access the nested message property */}
-            </div>
-          ) : null}
+          <div className="analytics-side-pane">
+            <h3>Analytics</h3>
+            {loadingStatus === 'loading' && <p>Loading Analytics...</p>}
+            {loadingStatus === 'loaded' && analyticsData && analyticsData.chatResponse && (
+              <p>{analyticsData.chatResponse.message}</p>
+            )}
+            {loadingStatus === 'error' && <p>Analytics will be loaded when students ask questions on this assignment.</p>}
+          </div>
         </>
       ) : <p>No assignment data available.</p>}
       <button onClick={closeModal} className='close-button'>X</button>
@@ -48,4 +54,3 @@ const Modal = ({ assignment, closeModal, courseId }) => {
 };
 
 export default Modal;
-

@@ -60,10 +60,9 @@ export const ChatModal = ({ assignment, onClose, courseId, professor = "professo
 
             </div>
             <div ref={chatWindowRef} className="mini-chat-window">
-                {/* Display chat messages as you did in the original Chat component */}
-                {messages.map((message, index) => (
+        {messages.map((message, index) => (
           <div key={index} className={`message mb-2 flex items-end ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
-            <div className="mini-chat-input">
+            <div className={`mini-chat-input ${message.type === "user" ? "message-user" : "message-bot"}`}>
               {message.content}
             </div>
           </div>

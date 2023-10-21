@@ -36,4 +36,19 @@
     cursor: pointer;
     color: #333;  /* Optional: color of the 'X' */
   }
+  .message-bot {
+    background-color: #ececec;
+    color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px;
+  }
   
+  /* Chat bubble for user */
+  .message-user {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 5px;
+  }

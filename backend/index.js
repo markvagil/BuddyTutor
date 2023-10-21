@@ -31,5 +31,4 @@ app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   });
 
-
 app.listen(port, () => console.log(`Backend listening on ${port}!`));

@@ -23,7 +23,7 @@ const Modal = ({ assignment, closeModal }) => {
           </ul>
         </>
       ) : <p>No assignment data available.</p>}
-      <button onClick={closeModal} className='close-button'>Close</button>
+     <button onClick={closeModal} className='close-button'>X</button>
     </div>
   );
 };

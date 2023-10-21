@@ -29,7 +29,7 @@ export const Chat = () => {
     try {
       addMessage("user", currentMessage);
       const messagesJSON = JSON.stringify(messages);
-      const response = await addQuestion("CS101", "A1", "joey", currentMessage, messagesJSON);
+      const response = await addQuestion("CS101", "A1", "Week 1-2 Quiz", currentMessage, messagesJSON);
       const responseData = await response.json();
       addMessage("bot", responseData.response || "How can I assist you?");
       setCurrentMessage("");

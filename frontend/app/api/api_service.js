@@ -87,7 +87,7 @@ export function getAnalytics(CourseId, AssignmentId) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ CourseId, AssignmentId }),
+    body: JSON.stringify({  "courseId": CourseId, "assignmentId": AssignmentId }),
   })
     .then((response) => {
       if (!response.ok) {

@@ -39,7 +39,7 @@ Content-Type: application/json
   
  {
   "courseId": "CS101",
-  "assignmentId": "A1"
+  "assignmentId": "W3 Quiz"
  }
 
 ### Get all courses

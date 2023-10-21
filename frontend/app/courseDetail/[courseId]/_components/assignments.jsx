@@ -64,7 +64,9 @@ export const CourseDetailPage = ({ courseId }) => {
       )}
 
       {/* Modal Component */}
-      {showModal && <Modal assignment={selectedAssignment} closeModal={closeModal} />}
+     {showModal && <Modal assignment={selectedAssignment} closeModal={closeModal} courseId={courseId} />}
+
+
     </div>
   );
 };

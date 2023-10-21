@@ -36,7 +36,7 @@ app.use(routes);
 app.get("/", (req, res) => {
   res.send(
     req.oidc.isAuthenticated()
-      ? res.redirect("http://localhost:3001/dashboard")
+      ? res.redirect("https://frontend-dxle.onrender.com/dashboard")
       : "Logged out"
   );
 });

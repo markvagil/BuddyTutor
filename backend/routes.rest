@@ -1,11 +1,13 @@
-# // get request with prompt variable
 
-POST http://localhost:3000/frontend_query
+###
+#courseId, assignmentId, studentId, question
+POST http://localhost:3000/add_question
 Content-Type: application/json
-
-{
-  "question": "What is 3 * 3",
-  "courseId": "hello",
-  "studentId" : "joey" 
-
-}
+  
+ {
+  "courseId": "CS101",
+  "assignmentId": "A1",
+  "studentId": "joey",
+  "question": "hello, what is 100 * 100"
+ }
+ 

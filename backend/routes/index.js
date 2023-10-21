@@ -15,7 +15,7 @@ const checkAuthStatus = (req, res, next) => { // This is the middleware that wil
 
 router.post('/chat', chatController.chatController);
 
-router.post('/frontend_query', frontendQuery.handleChatRequest);
+router.post('/add_question', frontendQuery.addQuestion);
 
 
 module.exports = router

@@ -1,5 +1,5 @@
 // Express app
-
+const mongoose = require('mongoose');
 const express = require('express');
 const { auth } = require('express-openid-connect');
 const cors = require('cors');
@@ -34,5 +34,19 @@ app.use(routes)
 app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');
   });
+
+// before listening, mongoose connect with MONGODB_URI
+
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).catch(error => console.error('MongoDB connection error:', error.message));
+
+mongoose.connection.on('error', err => {
+    console.error('MongoDB connection error:', err.message);
+});
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB');
+});
 
 app.listen(port, () => console.log(`Backend listening on ${port}!`));

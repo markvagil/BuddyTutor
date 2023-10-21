@@ -11,8 +11,8 @@ const chatController = async (userInput, systemMessage) => {
       'https://api.openai.com/v1/chat/completions',
       {
         model: "gpt-3.5-turbo",
-        messages: messageList,
-        temperature: 0.7
+        messages: messageList, 
+        temperature: 0.7 // Higher temperature results in more creative responses
       },
       {
         headers: {

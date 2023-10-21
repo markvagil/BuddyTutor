@@ -64,6 +64,8 @@ export const CourseDetailPage = ({ courseId }) => {
               <div className="assignment-card">
                 <h2>{assignment.assignmentId}</h2>
                 <p>{assignment.assignmentData}</p>
+               </div>
+               <div className="chatbot-modal">
                 
                </div>
             </li>

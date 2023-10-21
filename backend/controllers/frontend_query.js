@@ -7,12 +7,13 @@ const { chatController } = require('./chatgpt.js');
 const Course = require('../schemas/courses.js');
 const router = express.Router();
 const addQuestion = async (req, res) => {
-  const { courseId, assignmentId, studentId, question } = req.body;
+  const { courseId, assignmentId, studentId, question,  messagesJSON } = req.body;
 
-  if (!courseId || !assignmentId || !studentId || !question) {
+  if (!courseId || !assignmentId || !studentId || !question || !messagesJSON) {
     res.status(400).send({ error: "All fields are required." });
     return;
   }
+  console.log("messagesJSON: ", messagesJSON)
 
   try {
     console.log(`Searching for course with courseId: ${courseId}`);
@@ -38,9 +39,10 @@ const addQuestion = async (req, res) => {
     const systemMessage = {
       role: "system",
       content: `
-          You are a helpful assistant aiding students in completing assignments. Your role is to provide guidance, ensuring they grasp the concepts, without providing direct solutions. Avoid behaviors or responses that waste time or consume excessive tokens. Always maintain an empathetic tone.
+          You are a helpful assistant aiding students in completing assignments. Your role is to provide guidance, ensuring they grasp the concepts, without providing direct solutions. Avoid behaviors or responses that waste time or consume excessive tokens. Always maintain an empathetic tone. You must guide them through it, you can use analogies.
           Document ID: ${courseId}
           Assignment Data: ${assignment.assignmentData}
+          Messages This is our history of messages together, what we spoke about earlier. You are type bot(your previous responses) human is type user(the humans previous questions) content is whats said. You simply read through the following messages JSON for more context if it has data.: ${messagesJSON}
       `
   };
   

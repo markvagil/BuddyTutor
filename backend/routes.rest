@@ -7,7 +7,8 @@ Content-Type: application/json
   "courseId": "CS101",
   "assignmentId": "A1",
   "studentId": "joey",
-  "question": "hello, what is 100 * 100"
+  "question": "hello, what is 100 * 100",
+  "messagesJSON": "[History of messages]"
  }
 
 ###router.get('/get_assignment_data', dashboardData.getAssignmentData);  const { courseId, assignmentId } = req.body;

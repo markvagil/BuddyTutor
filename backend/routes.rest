@@ -1,0 +1,4 @@
+# // get request with prompt variable
+
+GET http://localhost:3000/chat?prompt="What is 3 * 3"
+Content-Type: application/json

@@ -26,6 +26,8 @@ const config = {
     issuerBaseURL: process.env.ISSUER_BASE_URL,
 };
 app.use(auth(config));
+app.use(express.json());
+app.use(routes)
 
 app.get('/', (req, res) => {
     res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out');

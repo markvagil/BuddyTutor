@@ -22,6 +22,6 @@ router.post("/getAllAssignments", dashboardData.getAllAssignments);
 
 router.post("/getAnalytics", dashboardData.getAnalytics);
 
-router.post("/allCourses", dashboardData.getAllCourseInfo);
+router.get("/allCourses", dashboardData.getAllCourseInfo);
 
 module.exports = router;

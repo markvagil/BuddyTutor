@@ -1,43 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { getAllAssignments } from "../../../api/api_service";
+import "./CourseDetailPage.css"; // Import your CSS file for styling
 
 export const CourseDetailPage = ({ courseId }) => {
-  const [courseDetails, setCourseDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true); // Initialize isLoading state
+  const [assignments, setAssignments] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Inside the useEffect, setIsLoading can be used
     setIsLoading(true);
     console.log(`Course ID passed to CourseDetailPage is ${courseId}`);
 
     getAllAssignments(courseId)
       .then((response) => {
-        if (response && response.courses && Array.isArray(response.courses)) {
-          setCourseDetails(response.courses);
+        if (
+          response &&
+          response.assignments &&
+          Array.isArray(response.assignments)
+        ) {
+          setAssignments(response.assignments);
         } else {
           console.warn("Unexpected API response structure.");
         }
       })
       .catch((err) => {
-        console.error("An error occurred while fetching course data:", err);
+        console.error("An error occurred while fetching assignments:", err);
         // Handle error state if necessary
       })
       .finally(() => {
-        setIsLoading(false); // Set isLoading to false after data fetching is done
+        setIsLoading(false);
       });
-  }, [courseId]); // Include courseId as a dependency to re-run the effect when courseId changes
+  }, [courseId]);
 
   return (
-    <div>
+    <div className="assignment-list">
       {isLoading ? (
         <p>Loading...</p>
-      ) : courseDetails ? (
-        <div>
-          <h1>{`Course ID: ${courseDetails.courseId}`}</h1>
-          <p>{`Description: ${courseDetails.courseDescription}`}</p>
-        </div>
+      ) : assignments.length > 0 ? (
+        <ul>
+          {assignments.map((assignment) => (
+            <li key={assignment._id}>
+              <div className="assignment-card">
+                <h2>{assignment.assignmentId}</h2>
+                <p>{assignment.assignmentData}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : (
-        <p>No data available.</p>
+        <p>No assignments available for this course.</p>
       )}
     </div>
   );

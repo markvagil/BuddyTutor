@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/";
+const API_URL = "https://buddy-tutor.onrender.com/";
 
 export function getCourses() {
   return fetch(`${API_URL}allCourses`, {

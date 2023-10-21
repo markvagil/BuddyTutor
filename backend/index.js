@@ -3,6 +3,7 @@
 const express = require('express');
 const { auth } = require('express-openid-connect');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const routes = require('./routes');
 
@@ -16,6 +17,7 @@ app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }));
+app.use(bodyParser.json());
 
 const config = {
     authRequired: false,

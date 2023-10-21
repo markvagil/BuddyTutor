@@ -1,6 +1,7 @@
 // create a route for chatController in controllers/chatgpt.js:
 const express = require('express');
 const chatController = require('../controllers/chatgpt.js');
+const frontendQuery = require('../controllers/frontend_query.js');
 
 const router = express.Router();
 
@@ -12,7 +13,9 @@ const checkAuthStatus = (req, res, next) => { // This is the middleware that wil
 }
 
 
-router.get('/chat', chatController.chatController);
+router.post('/chat', chatController.chatController);
+
+router.post('/frontend_query', frontendQuery.handleChatRequest);
 
 
 module.exports = router

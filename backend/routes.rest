@@ -1,4 +1,11 @@
 # // get request with prompt variable
 
-GET http://localhost:3000/chat?prompt="What is 3 * 3"
+POST http://localhost:3000/frontend_query
 Content-Type: application/json
+
+{
+  "question": "What is 3 * 3",
+  "courseId": "hello",
+  "studentId" : "joey" 
+
+}

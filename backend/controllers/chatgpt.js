@@ -1,13 +1,11 @@
 const axios = require('axios');
 
-const chatController = async (req, res) => {
-  const user_input = req.query.prompt || "What is your favorite color?"; // Get prompt from query parameter or use default
-  
+const chatController = async (userInput, systemMessage) => {
   const messageList = [
-    { role: "user", content: user_input },
-    { role: "system", content: "You are a helpful assistant that will help students complete assignments without giving them the complete answer, guided learning no matter what pertaining to the document." } // System instruction for GPT-3.5 Turbo
+    { role: "user", content: userInput },
+    systemMessage  // Use the passed system message
   ];
-  
+
   try {
     const GPTOutput = await axios.post(
       'https://api.openai.com/v1/chat/completions',
@@ -25,11 +23,12 @@ const chatController = async (req, res) => {
     );
     
     const output_text = GPTOutput.data.choices[0].message.content.trim();
-    res.send({ message: output_text });
+    return { message: output_text };  // Return the output as an object
   } catch (err) {
     console.error(err);
-    res.status(500).send({ error: `An error occurred while processing your request: ${err.message}` });
+    return { error: `An error occurred while processing your request: ${err.message}` };  // Return the error as an object
   }
 };
+
 
 module.exports = { chatController };

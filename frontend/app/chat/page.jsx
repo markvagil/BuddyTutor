@@ -1,59 +1,79 @@
-"use client";
-import React, { useState } from "react";
-import { addQuestion } from "../api/api_service"; // Make sure the addQuestion function is correctly imported
+"use client";import React, { useState, useEffect, useRef } from "react";
+import { addQuestion } from "../api/api_service";
 
 export const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [currentMessage, setCurrentMessage] = useState("");
-  const [loading, setLoading] = useState(false); // State to track loading
+  const [loading, setLoading] = useState(false);
+  const chatWindowRef = useRef(null);
 
   const addMessage = (type, content) => {
     setMessages((prevMessages) => [...prevMessages, { type, content }]);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
   const sendMessage = async () => {
-    setLoading(true); // Set loading state to true before API call
+    if (currentMessage.trim() === "") return;
+
+    setLoading(true);
     try {
       addMessage("user", currentMessage);
-      console.log(`Most recent message: ${currentMessage}`);  // Log the most recent message
-
-      // Convert the entire chat history to a JSON-formatted string
       const messagesJSON = JSON.stringify(messages);
-
-      // Call addQuestion function to send the question and the entire chat history
-      const response = await addQuestion("CS101", "A1", "joey", currentMessage, messagesJSON); // Adding messagesJSON as a parameter
-
-      // Parse the JSON response to get the actual message content
+      const response = await addQuestion("CS101", "A1", "joey", currentMessage, messagesJSON);
       const responseData = await response.json();
-
       addMessage("bot", responseData.response || "How can I assist you?");
-      
-      // Clear the input field
       setCurrentMessage("");
     } catch (error) {
       console.error("Failed to send message:", error);
       addMessage("bot", "Error sending message.");
     } finally {
-      setLoading(false); // Set loading state to false after API call
+      setLoading(false);
     }
   };
+
+  const copyText = (text) => {
+    navigator.clipboard.writeText(text);
+  };
+
+  useEffect(() => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  }, [messages, loading]);
+
   return (
-    <main className="bg-gray-100 p-4">
-      <div className="chat-window bg-white rounded-lg p-4">
+    <main className="bg-indigo-100 p-4 h-screen flex flex-col">
+      <div ref={chatWindowRef} className="chat-window bg-white rounded-lg p-4 flex-grow overflow-y-auto shadow-lg">
         {messages.map((message, index) => (
-          <div className={`message ${message.type === "user" ? "text-blue-500" : "text-green-500"} mb-2`} key={index}>
-            {message.content}
+          <div key={index} className={`message mb-2 relative flex items-end ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
+            <div className={`p-2 rounded-lg ${message.type === "user" ? "bg-indigo-600 text-white" : "bg-indigo-300 text-black"}`}>
+              {message.content}
+            </div>
+            <span className="absolute top-0 cursor-pointer text-gray-500" onClick={() => copyText(message.content)}>&#x2398;</span>
           </div>
         ))}
+        {loading && (
+          <div className="message mb-2 flex items-end flex-row">
+            <div className="p-2 rounded-lg bg-gray-400 text-white">
+              Loading...
+            </div>
+          </div>
+        )}
       </div>
       <div className="chat-input mt-4 flex items-center">
         <input
-          className="rounded-lg border-2 border-gray-300 flex-1 mr-2 p-2"
+          className="rounded-lg border-2 border-indigo-400 flex-1 mr-2 p-2"
           type="text"
           value={currentMessage}
           onChange={(e) => setCurrentMessage(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
-        <button className="bg-blue-500 text-white p-2 rounded-lg" onClick={sendMessage} disabled={loading}>
+        <button className="bg-indigo-600 text-white p-2 rounded-lg" onClick={sendMessage} disabled={loading}>
           {loading ? "Loading..." : "Send"}
         </button>
       </div>

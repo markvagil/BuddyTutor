@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { addQuestion } from "../api/api_service";
+import "./chat.css"; // Import your CSS file for styling
 
 
-export const ChatModal = ({ assignment, onClose, courseId }) => {
+export const ChatModal = ({ assignment, onClose, courseId, professor = "professor" }) => {
         const [messages, setMessages] = useState([
           {
             type: "bot",
@@ -49,16 +50,17 @@ export const ChatModal = ({ assignment, onClose, courseId }) => {
         }, [messages, loading]);
 
         return (
-            <div className="chat-modal">
-              <div className="chat-header">
-                <h3>Welcome to the Chat</h3>
-                <button onClick={onClose}>Close</button> {/* Add a close button */}
-              </div>
-              <div ref={chatWindowRef} className="chat-window bg-white rounded-lg p-4 flex-grow overflow-y-auto shadow-lg">
+          <div className="mini-chat-modal">
+            <div className="mini-chat-header">
+              <h3>Chat</h3>
+              <button className="close-button" onClick={onClose}>X</button>
+
+            </div>
+            <div ref={chatWindowRef} className="mini-chat-window">
                 {/* Display chat messages as you did in the original Chat component */}
                 {messages.map((message, index) => (
           <div key={index} className={`message mb-2 flex items-end ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
-            <div className={`p-2 rounded-lg ${message.type === "user" ? "bg-indigo-600 text-white" : "bg-indigo-300 text-black"}`}>
+            <div className="mini-chat-input">
               {message.content}
             </div>
           </div>

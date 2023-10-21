@@ -99,10 +99,10 @@ const getAssignmentData = async (req, res) => {
                 role: "system",
                 content: `
                     Only print the most common questions asked, and the most common responses given, you can keep it short but if many questions are fed to you, give more common questions and answers, only reply in the format is as follows with no other text besides it and other <question><response> pairs:
-                    <question><response>
-                    <question><response>
-                    <question><response>
-                    <question><response>
+                   1.  Question : Response
+                   2.  Question : Response
+                   3.  Question : Response
+                   4.  Question : Response
                     
                     Document ID: ${courseId}
                 `

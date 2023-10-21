@@ -9,7 +9,21 @@ import {
   AvatarImage,
 } from "../../components/ui/avatar";
 import { Button } from "../../components/ui/button";
+/*  <Button asChild>
+          <Link href="/chat">Chat</Link>
+        </Button>
 
+        <Button size="icon" asChild>
+          <Link href="/settings">
+            <Settings />
+          </Link>
+        </Button>
+
+        <Button size="icon" asChild>
+          <Link href="/user">
+            <User />
+          </Link>
+        </Button>*/
 export const Navbar = () => {
   return (
     <div
@@ -29,21 +43,7 @@ export const Navbar = () => {
           <Link href="/dashboard">Dashboard</Link>
         </Button>
 
-        <Button asChild>
-          <Link href="/chat">Chat</Link>
-        </Button>
-
-        <Button size="icon" asChild>
-          <Link href="/settings">
-            <Settings />
-          </Link>
-        </Button>
-
-        <Button size="icon" asChild>
-          <Link href="/user">
-            <User />
-          </Link>
-        </Button>
+      
       </div>
     </div>
   );

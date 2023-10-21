@@ -3,7 +3,9 @@ import { getAllAssignments } from "../../../api/api_service";
 import "./CourseDetailPage.css"; // Import your CSS file for styling
 import Modal from "./Modal";  // Import the Modal component, which we will define later
 import ChatModal from "../../../chat/chatmodal";  // Import the ChatModal component, which we will define later
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import { faWindowRestore } from '@fortawesome/free-solid-svg-icons';
 export const CourseDetailPage = ({ courseId }) => {
   const [assignments, setAssignments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +13,7 @@ export const CourseDetailPage = ({ courseId }) => {
   const [showModal, setShowModal] = useState(false);  // New state to control Modal visibility
   const [showChat, setShowChat] = useState(false);  // New state to control Chat visibility
   const [currentOpenWindow, setCurrentOpenWindow] = useState(null);  // New state
+ 
 
   const openModal = (assignment) => {
     setCurrentOpenWindow('modal');  // Update the current open window
@@ -56,7 +59,6 @@ export const CourseDetailPage = ({ courseId }) => {
         setIsLoading(false);
       });
   }, [courseId]);
-
   return (
     <div className="assignment-list">
       {isLoading ? (
@@ -64,24 +66,29 @@ export const CourseDetailPage = ({ courseId }) => {
       ) : assignments.length > 0 ? (
         <ul>
           {assignments.map((assignment) => (
-      <li key={assignment._id}>
-        <div className="assignment-card" onClick={() => openModal(assignment)}>
-          <h2>{assignment.assignmentId}</h2>
-          <p>{assignment.assignmentData}</p>
-        </div>
-        <button onClick={() => openChat(assignment)}>Open Chat</button> {/* Added this line */}
-      </li>
-    ))}
+            // open modal on click
+
+            <li key={assignment._id}>
+             <div className="assignment-card" onClick={() => openModal(assignment)}>
+  <h2>{assignment.assignmentId}</h2>
+  <p>{assignment.assignmentData}</p>
+  <button className="chat-bubble" onClick={(e) => {
+    e.stopPropagation();  // Stop the click event from bubbling up to the parent
+    openChat(assignment);
+  }}>
+    <FontAwesomeIcon icon={faCommentAlt} />
+  </button>
+</div>
+            </li>
+          ))}
         </ul>
       ) : (
         <p>No assignments available for this course.</p>
       )}
-
-      {/* Modal Component */}
-     {showModal && <Modal assignment={selectedAssignment} closeModal={closeWindows} courseId={courseId} />}
-     {showChat && <ChatModal assignment={selectedAssignment} onClose={closeWindows} courseId={courseId} />} 
-
-
+  
+      {showModal && <Modal assignment={selectedAssignment} closeModal={closeWindows} courseId={courseId} />}
+      {showChat && <ChatModal assignment={selectedAssignment} onClose={closeWindows} courseId={courseId} />}
     </div>
   );
+  
 };

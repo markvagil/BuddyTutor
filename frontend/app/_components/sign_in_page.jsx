@@ -1,6 +1,8 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation"; // Import useRouter hook from Next.js
+import { Button } from "../../components/ui/button";
+import Link from "next/link";
 
 export const SignInPage = () => {
   const router = useRouter(); // Initialize useRouter hook
@@ -33,16 +35,19 @@ export const SignInPage = () => {
             placeholder="Enter your password"
           />
         </div>
-        <button className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200">
-          Sign In
-        </button>
+        <Button
+          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200"
+          asChild
+        >
+          <Link href="/dashboard">Sign In</Link>
+        </Button>
         {/* Auth0 Sign In Button */}
-        <button
+        <Button
           className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600 focus:outline-none focus:border-green-700 focus:ring focus:ring-green-200 mt-4"
           onClick={redirectToAuth0Login}
         >
           Sign In with Auth0
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -2,7 +2,12 @@
 import { addQuestion } from "../api/api_service";
 
 export const Chat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    {
+      type: "bot",
+      content: "Welcome to the chat! How can I assist you with the assignment?",
+    },
+  ]);
   const [currentMessage, setCurrentMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const chatWindowRef = useRef(null);
@@ -36,10 +41,6 @@ export const Chat = () => {
     }
   };
 
-  const copyText = (text) => {
-    navigator.clipboard.writeText(text);
-  };
-
   useEffect(() => {
     if (chatWindowRef.current) {
       chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
@@ -50,11 +51,10 @@ export const Chat = () => {
     <main className="bg-indigo-100 p-4 h-screen flex flex-col">
       <div ref={chatWindowRef} className="chat-window bg-white rounded-lg p-4 flex-grow overflow-y-auto shadow-lg">
         {messages.map((message, index) => (
-          <div key={index} className={`message mb-2 relative flex items-end ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
+          <div key={index} className={`message mb-2 flex items-end ${message.type === "user" ? "flex-row-reverse" : "flex-row"}`}>
             <div className={`p-2 rounded-lg ${message.type === "user" ? "bg-indigo-600 text-white" : "bg-indigo-300 text-black"}`}>
               {message.content}
             </div>
-            <span className="absolute top-0 cursor-pointer text-gray-500" onClick={() => copyText(message.content)}>&#x2398;</span>
           </div>
         ))}
         {loading && (
@@ -72,6 +72,7 @@ export const Chat = () => {
           value={currentMessage}
           onChange={(e) => setCurrentMessage(e.target.value)}
           onKeyDown={handleKeyDown}
+          placeholder="Ask me anything about the assignment"
         />
         <button className="bg-indigo-600 text-white p-2 rounded-lg" onClick={sendMessage} disabled={loading}>
           {loading ? "Loading..." : "Send"}

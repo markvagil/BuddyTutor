@@ -11,7 +11,7 @@ const checkAuthStatus = (req, res, next) => {
   if (req.oidc.isAuthenticated()) {
     return next();
   }
-  res.redirect("http://localhost:3000/login");
+  res.redirect("https://buddy-tutor.vercel.app/login");
 };
 
 router.post("/add_question", frontendQuery.addQuestion);

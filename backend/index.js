@@ -15,7 +15,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001", "https://frontend-dxle.onrender.com"],
+    origin: ["http://localhost:3000", "http://localhost:3001", "https://buddy-tutor.vercel.app"],
     credentials: false,
   })
 );
@@ -36,7 +36,7 @@ app.use(routes);
 app.get("/", (req, res) => {
   res.send(
     req.oidc.isAuthenticated()
-      ? res.redirect("https://frontend-dxle.onrender.com/dashboard")
+      ? res.redirect("https://buddy-tutor.vercel.app/dashboard")
       : "Logged out"
   );
 });

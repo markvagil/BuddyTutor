@@ -8,7 +8,7 @@ export const SignInPage = () => {
   const router = useRouter(); // Initialize useRouter hook
 
   const redirectToAuth0Login = () => {
-    router.push("http://localhost:3000/login"); // Redirect to /login route
+    router.push("https://buddy-tutor.onrender.com/login"); // Redirect to /login route
   };
 
   return (

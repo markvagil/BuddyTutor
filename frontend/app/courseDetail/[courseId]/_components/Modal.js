@@ -11,6 +11,10 @@ const Modal = ({ assignment, closeModal, courseId }) => {
       setLoadingStatus('loading');
       getAnalytics(courseId, assignment.assignmentId)
         .then((data) => {
+          // each new line should be split, so an array of strings
+           data.chatResponse.message = data.chatResponse.message.split('\n');
+
+
           setAnalyticsData(data);  // Update the state to hold analytics data
           setLoadingStatus('loaded');
         })
@@ -39,10 +43,16 @@ const Modal = ({ assignment, closeModal, courseId }) => {
           </ul>
           {/* Display analytics if available */}
           <div className="analytics-side-pane">
-            <h3>Analytics</h3>
-            {loadingStatus === 'loading' && <p>Loading Analytics...</p>}
+            <h2>Analytics on Common Questions</h2>
+            {loadingStatus === 'loading' && <p>Loading Analytics on most common questions...</p>}
             {loadingStatus === 'loaded' && analyticsData && analyticsData.chatResponse && (
-              <p>{analyticsData.chatResponse.message}</p>
+              <ul>
+                {analyticsData.chatResponse.message.map((message, index) => (
+                  <li key={index}>
+                    {message}
+                  </li>
+                ))}
+              </ul>
             )}
             {loadingStatus === 'error' && <p>Analytics will be loaded when students ask questions on this assignment.</p>}
           </div>

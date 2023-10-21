@@ -5,7 +5,7 @@ Content-Type: application/json
   
  {
   "courseId": "CS101",
-  "assignmentId": "A1",
+  "assignmentId": "Week 1-2 Quiz",
   "studentId": "joey",
   "question": "hello, what is 100 * 100",
   "messagesJSON": "[History of messages]"

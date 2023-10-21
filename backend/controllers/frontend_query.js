@@ -66,7 +66,7 @@ const addQuestion = async (req, res) => {
     // Save the updated course document
     await course.save();
 
-    res.send({ message: "Question and response added successfully." });
+    res.send({ response: chatResponse.message});
   } catch (error) {
     console.error(error);
     res.status(500).send({ error: "Internal server error." });

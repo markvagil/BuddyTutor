@@ -90,3 +90,31 @@ export function getAnalytics(CourseId, AssignmentId) {
       throw error; // propagate the error so that it can be caught in the calling function
     });
 }
+
+
+//router.post('/add_question', frontendQuery.addQuestion);
+/*  "courseId": "CS101",
+  "assignmentId": "A1",
+  "studentId": "joey",
+  "question": "hello, what is 100 * 100"*/
+
+export function addQuestion(CourseId = "CS101", AssignmentId = "A1", StudentId = "joey", Question = "Hello, help me please.") {
+  return fetch(`${API_URL}add_question`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ CourseId, AssignmentId, StudentId, Question }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response;
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      throw error; // propagate the error so that it can be caught in the calling function
+    });
+}
+

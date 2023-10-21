@@ -17,10 +17,13 @@ export const Navbar = () => {
         "z-50 bg-background dark:bg-[#1F1F1F] fixed top-0 flex items-center w-full p-6"
       )}
     >
-      <Avatar>
-        <AvatarImage src="/logo.svg" />
-        <AvatarFallback>Logo</AvatarFallback>
-      </Avatar>
+      {/* Universal link to the home page */}
+      <Link href="/">
+        <Avatar>
+          <AvatarImage src="/logo.svg" />
+          <AvatarFallback>Logo</AvatarFallback>
+        </Avatar>
+      </Link>
       <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
         <Button asChild>
           <Link href="/dashboard">Dashboard</Link>

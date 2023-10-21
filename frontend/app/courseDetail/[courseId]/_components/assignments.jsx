@@ -1,10 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { getAllAssignments } from "../../../api/api_service";
 import "./CourseDetailPage.css"; // Import your CSS file for styling
+import Modal from "./Modal";  // Import the Modal component, which we will define later
 
 export const CourseDetailPage = ({ courseId }) => {
   const [assignments, setAssignments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedAssignment, setSelectedAssignment] = useState(null);  // New state to track selected assignment
+  const [showModal, setShowModal] = useState(false);  // New state to control Modal visibility
+  
+  const openModal = (assignment) => {
+    setSelectedAssignment(assignment);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setSelectedAssignment(null);
+    setShowModal(false);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -38,7 +51,7 @@ export const CourseDetailPage = ({ courseId }) => {
       ) : assignments.length > 0 ? (
         <ul>
           {assignments.map((assignment) => (
-            <li key={assignment._id}>
+            <li key={assignment._id} onClick={() => openModal(assignment)}>
               <div className="assignment-card">
                 <h2>{assignment.assignmentId}</h2>
                 <p>{assignment.assignmentData}</p>
@@ -49,8 +62,9 @@ export const CourseDetailPage = ({ courseId }) => {
       ) : (
         <p>No assignments available for this course.</p>
       )}
+
+      {/* Modal Component */}
+      {showModal && <Modal assignment={selectedAssignment} closeModal={closeModal} />}
     </div>
   );
 };
-
-export default CourseDetailPage;

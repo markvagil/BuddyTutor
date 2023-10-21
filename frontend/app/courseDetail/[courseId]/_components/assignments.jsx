@@ -57,7 +57,6 @@ export const CourseDetailPage = ({ courseId }) => {
         setIsLoading(false);
       });
   }, [courseId]);
-
   return (
     <div className="assignment-list">
       {isLoading ? (
@@ -65,24 +64,24 @@ export const CourseDetailPage = ({ courseId }) => {
       ) : assignments.length > 0 ? (
         <ul>
           {assignments.map((assignment) => (
-      <li key={assignment._id}>
-        <div className="assignment-card" onClick={() => openModal(assignment)}>
-          <h2>{assignment.assignmentId}</h2>
-          <p>{assignment.assignmentData}</p>
-        </div>
-        <button className="chat-bubble" onClick={() => openChat(assignment)}> <FontAwesomeIcon icon={faCommentAlt} /></button> {/* Added this line */}
-      </li>
-    ))}
+            <li key={assignment._id}>
+              <div className="assignment-card">
+                <h2>{assignment.assignmentId}</h2>
+                <p>{assignment.assignmentData}</p>
+                <button className="chat-bubble" onClick={() => openChat(assignment)}>
+                  <FontAwesomeIcon icon={faCommentAlt} />
+                </button>  {/* Moved this line here */}
+              </div>
+            </li>
+          ))}
         </ul>
       ) : (
         <p>No assignments available for this course.</p>
       )}
-
-      {/* Modal Component */}
-     {showModal && <Modal assignment={selectedAssignment} closeModal={closeWindows} courseId={courseId} />}
-     {showChat && <ChatModal assignment={selectedAssignment} onClose={closeWindows} courseId={courseId} />} 
-
-
+  
+      {showModal && <Modal assignment={selectedAssignment} closeModal={closeWindows} courseId={courseId} />}
+      {showChat && <ChatModal assignment={selectedAssignment} onClose={closeWindows} courseId={courseId} />}
     </div>
   );
+  
 };

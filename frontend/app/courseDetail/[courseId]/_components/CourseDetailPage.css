@@ -1,48 +1,38 @@
-/* CourseDetailPage.css */
-
 .assignment-list {
   list-style: none;
   padding: 0;
 }
 
 .assignment-card {
+  position: relative;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 16px;
+  padding-left: 64px;  /* Add enough left padding to accommodate the chat bubble */
   margin: 8px 0;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+}
 
-  &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-
-  h2 {
-    margin-bottom: 8px;
-    font-size: 18px;
-  }
-
-  p {
-    font-size: 14px;
-  }
+.assignment-card:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .chat-bubble {
+  position: absolute;
+  top: 16px;
+  left: 16px;  /* Position it to the left */
   background-color: #007bff;
   color: white;
-  padding: 16px;
-  border-radius: 50%;  /* Makes it circular */
+  border-radius: 50%;
   width: 48px;
   height: 48px;
-  text-align: center;
-  line-height: 16px;  /* Vertically centers the text */
   border: none;
   cursor: pointer;
-  font-size: 12px;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;  /* Ensures that the bubble stays on top */
 }
 
 .chat-bubble:hover {

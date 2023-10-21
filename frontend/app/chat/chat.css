@@ -2,8 +2,8 @@
     position: fixed;
     bottom: 50px; /* Further offset from bottom */
     right: 50px;  /* Further offset from right */
-    width: 350px;
-    height: 450px;
+    width: 400px;
+    height: 550px;
     background-color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 10px 10px 0 0;

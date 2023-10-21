@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { addQuestion } from "../api/api_service";
 import "./chat.css"; // Import your CSS file for styling
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 
 export const ChatModal = ({ assignment, onClose, courseId, professor = "professor" }) => {
         const [messages, setMessages] = useState([
@@ -83,9 +85,9 @@ export const ChatModal = ({ assignment, onClose, courseId, professor = "professo
                 onKeyDown={handleKeyDown}
                 placeholder="Ask me anything about the assignment"
         />
-        <button className="bg-indigo-600 text-white p-2 rounded-lg" onClick={sendMessage} disabled={loading}>
-                  {loading ? "Loading..." : "Send"}
-                </button>
+     <button className="bg-indigo-600 text-white p-2 rounded-lg" onClick={sendMessage} disabled={loading}>
+  {loading ? "Loading..." : <FontAwesomeIcon icon={faPaperPlane} />}
+</button>
               </div>
             </div>
           );

@@ -8,7 +8,7 @@ export const CourseDetailPage = ({ courseId }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAssignment, setSelectedAssignment] = useState(null);  // New state to track selected assignment
   const [showModal, setShowModal] = useState(false);  // New state to control Modal visibility
-  
+  const [showChat, setShowCHat] = useState(false);  // New state to control Chat visibility
   const openModal = (assignment) => {
     setSelectedAssignment(assignment);
     setShowModal(true);
@@ -18,7 +18,16 @@ export const CourseDetailPage = ({ courseId }) => {
     setSelectedAssignment(null);
     setShowModal(false);
   };
+  const closeChat = () => {
+    setSelectedAssignment(null);
+    setShowChat(false);
+  }
 
+  const openChat = (assignment) => {
+    setSelectedAssignment(assignment);
+    setShowChat(true);
+  };
+  
   useEffect(() => {
     setIsLoading(true);
     console.log(`Course ID passed to CourseDetailPage is ${courseId}`);
@@ -55,7 +64,8 @@ export const CourseDetailPage = ({ courseId }) => {
               <div className="assignment-card">
                 <h2>{assignment.assignmentId}</h2>
                 <p>{assignment.assignmentData}</p>
-              </div>
+                
+               </div>
             </li>
           ))}
         </ul>
@@ -65,6 +75,7 @@ export const CourseDetailPage = ({ courseId }) => {
 
       {/* Modal Component */}
      {showModal && <Modal assignment={selectedAssignment} closeModal={closeModal} courseId={courseId} />}
+      {showChat && <Modal assignment={selectedAssignment} closeModal={closeChat} courseId={courseId} />}
 
 
     </div>

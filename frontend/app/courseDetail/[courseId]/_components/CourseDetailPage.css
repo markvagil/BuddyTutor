@@ -26,3 +26,25 @@
     font-size: 14px;
   }
 }
+
+.chat-bubble {
+  background-color: #007bff;
+  color: white;
+  padding: 16px;
+  border-radius: 50%;  /* Makes it circular */
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  line-height: 16px;  /* Vertically centers the text */
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-bubble:hover {
+  background-color: #0056b3;
+}

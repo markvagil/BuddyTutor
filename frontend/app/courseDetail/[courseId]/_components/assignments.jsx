@@ -3,7 +3,8 @@ import { getAllAssignments } from "../../../api/api_service";
 import "./CourseDetailPage.css"; // Import your CSS file for styling
 import Modal from "./Modal";  // Import the Modal component, which we will define later
 import ChatModal from "../../../chat/chatmodal";  // Import the ChatModal component, which we will define later
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 export const CourseDetailPage = ({ courseId }) => {
   const [assignments, setAssignments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +70,7 @@ export const CourseDetailPage = ({ courseId }) => {
           <h2>{assignment.assignmentId}</h2>
           <p>{assignment.assignmentData}</p>
         </div>
-        <button onClick={() => openChat(assignment)}>Open Chat</button> {/* Added this line */}
+        <button className="chat-bubble" onClick={() => openChat(assignment)}> <FontAwesomeIcon icon={faCommentAlt} /></button> {/* Added this line */}
       </li>
     ))}
         </ul>

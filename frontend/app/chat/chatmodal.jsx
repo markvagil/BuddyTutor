@@ -48,11 +48,12 @@ export const ChatModal = ({ assignment, onClose, courseId, professor = "professo
             chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
           }
         }, [messages, loading]);
+    
 
         return (
           <div className="mini-chat-modal">
             <div className="mini-chat-header">
-              <h3>Chat</h3>
+              <h3>BuddyTutor</h3>
               <button className="close-button" onClick={onClose}>X</button>
 
             </div>

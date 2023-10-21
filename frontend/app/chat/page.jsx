@@ -1,4 +1,4 @@
-"use client";import React, { useState, useEffect, useRef } from "react";
+/*"use client";import React, { useState, useEffect, useRef } from "react";
 import { addQuestion } from "../api/api_service";
 
 export const Chat = () => {
@@ -83,3 +83,4 @@ export const Chat = () => {
 };
 
 export default Chat;
+*/

@@ -22,5 +22,7 @@ router.get('/get_assignment_data', dashboardData.getAssignmentData);
 
 router.get('/getAllAssignments', dashboardData.getAllAssignments);
 
+router.get('/getAnalytics', dashboardData.getAnalytics)
+
 
 module.exports = router

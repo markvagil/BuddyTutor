@@ -31,3 +31,15 @@ Content-Type: application/json
   "courseId": "CS101"
  }
 
+
+###router.get('/getAnalytics', dashboardData.getAnalytics) const getAnalytics = async(req, res) => {
+        // This will be used to get the analytics for an assignment in the course, 
+        //const { courseId, assignmentId } = req.body;
+
+GET http://localhost:3000/getAnalytics
+Content-Type: application/json
+  
+ {
+  "courseId": "CS101",
+  "assignmentId": "A1"
+ }
